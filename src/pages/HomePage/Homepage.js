@@ -1,24 +1,32 @@
-import React from "react";
-import Chatbot from "../Chatbot";
-import "./_homepage.scss";
-const Homepage = () => {
+import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+const Home = ({ socket }) => {
+  const navigate = useNavigate();
+  const [userName, setUserName] = useState("");
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    localStorage.setItem("userName", userName);
+    socket.emit("newUser", { userName, socketID: socket.id });
+    navigate("/chat");
+  };
   return (
-    <>
-      <div className="container homeContainer">
-        <div className="editor default">
-          <div className="main-editor">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Veritatis
-            id itaque adipisci magnam, reiciendis temporibus, quis quia magni
-            modi nesciunt dolor explicabo at! Eveniet aut impedit nihil
-            repudiandae voluptatibus et. Similique voluptatibus ex quos odio
-            cupiditate eligendi recusandae tenetur eveniet, ratione ut libero
-            nemo iusto. Corporis tempore fuga sint suscipit.
-          </div>
-          <Chatbot />
-        </div>
-      </div>
-    </>
+    <form className="home__container" onSubmit={handleSubmit}>
+      <h2 className="home__header">聊天客服</h2>
+      <label htmlFor="username">使用者名稱</label>
+      <input
+        type="text"
+        minLength={6}
+        name="username"
+        id="username"
+        className="username__input"
+        value={userName}
+        onChange={(e) => setUserName(e.target.value)}
+      />
+      <button className="home__cta">登入</button>
+    </form>
   );
 };
 
-export default Homepage;
+export default Home;
