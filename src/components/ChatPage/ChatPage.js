@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useRef } from "react";
 import ChatBody from "./ChatBody";
 import ChatFooter from "./ChatFooter";
+
+import "./_Chatbot.scss";
 import "./Chatpage.scss";
 
 const ChatPage = ({ socket }) => {
@@ -22,13 +24,12 @@ const ChatPage = ({ socket }) => {
     lastMessageRef.current?.scrollIntoView({ behavior: "smooth" });
   }, [messages]);
   const [chatbot, setChatbot] = useState(false);
-  console.log(messages);
 
   return (
     <div className="messenger">
       {chatbot === false ? (
         <div className=" d-wrap h-hotline" onClick={() => setChatbot(!chatbot)}>
-          <div className="chat-icon"></div>
+          <div className="chat-icon">1</div>
         </div>
       ) : (
         ""

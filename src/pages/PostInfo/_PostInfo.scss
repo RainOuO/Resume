@@ -1,0 +1,15 @@
+.isCollected {
+  svg {
+    color: red;
+    // background-color: red;
+  }
+  path {
+    // background-color: red;
+    // color: blue;
+  }
+}
+.notCollected {
+  svg {
+    color: green;
+  }
+}
